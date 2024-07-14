@@ -29,11 +29,11 @@ public class HelloController {
         return "hello";
     }
 
-    @GetMapping("hello-static")
-    public String hello() {
-        System.out.println("hello-static");
-        return "hello-static";
-    }
+//    @GetMapping("hello-static")
+//    public String hello() {
+//        System.out.println("hello-static");
+//        return "hello-static.html";
+//    }
 
     // 클라언트의 요청 처리
     @GetMapping("hello-mvc")
