@@ -4,7 +4,7 @@ import com.hello_spring.hello_spring.domain.Member;
 
 import java.util.*;
 
-public class  MemoryMemberRepository implements MemberRepository {
+public class MemoryMemberRepository implements MemberRepository {
     /*
     회원 정보를 저장하고 관리하기 위한 저장소 역할이기 때문에, 모든 인스턴스들이 동일한 저장소를 공유하도록 static 변수로 선언
     여러 인스턴스가 공유하는 클래스 변수(static variable)는 인스턴스 변수(instance variable)보다 동시성 문제가 발생할 가능성이 더 높다.

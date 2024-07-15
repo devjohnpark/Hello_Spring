@@ -24,7 +24,7 @@ class MemoryMemberRepositoryTest {
 
     // 리포지토리의 메서드와 동일한 테스트 메서드 정의
     @Test
-    public void saveMember() {
+    public void save() {
         Member member = new Member();
         member.setName("spring");
 
@@ -48,7 +48,7 @@ class MemoryMemberRepositoryTest {
     }
 
     @Test
-    public void findMemberByName() {
+    public void findByName() {
         Member member1 = new Member();
         member1.setName("spring1");
         memberRepository.save(member1);
@@ -62,7 +62,7 @@ class MemoryMemberRepositoryTest {
     }
 
     @Test
-    public void findAllMember() {
+    public void findAll() {
         Member member1 = new Member();
         member1.setName("spring1");
         memberRepository.save(member1);
