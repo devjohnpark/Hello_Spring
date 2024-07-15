@@ -27,15 +27,15 @@ public class  MemoryMemberRepository implements MemberRepository {
     }
 
     @Override
-    public Optional findMemberById(Long id) {
+    public Optional findById(Long id) {
         return Optional.ofNullable(store.get(id));
     }
 
     @Override
-    public Optional findMemberByName(String name) {
+    public Optional findByName(String name) {
         return store.values().stream().
                 filter(member -> member.getName().equals(name))
-                .findAny(); // 조건에 일치하는 값 없을시, Optional에 null 값이 감싸져서 반환된다.
+                .findAny(); // 조건에 일치하는 값 없을시, Optional에 null 값이 wrapping되서 반환된다.
     }
 
     // 실무에서는 리스트를 많이 쓴다. 리스트는 루프 돌리기도 편하기 때문.
