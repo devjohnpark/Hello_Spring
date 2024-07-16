@@ -15,4 +15,20 @@ public class MemberController {
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
     }
+
+/*
+    // 필드 주입
+    @Autowired private MemberService memberService; // 필드로 생성자 주입하여 자동 의존관계 설정
+*/
+
+
+/*
+    // settter 주입
+    private MemberService memberService;
+
+    @Autowired
+    public void setMemberService(MemberService memberService) {
+        this.memberService = memberService;
+    }
+*/
 }

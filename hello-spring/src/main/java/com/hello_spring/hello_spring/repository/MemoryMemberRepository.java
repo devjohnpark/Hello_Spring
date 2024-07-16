@@ -1,11 +1,13 @@
 package com.hello_spring.hello_spring.repository;
 
 import com.hello_spring.hello_spring.domain.Member;
+import com.hello_spring.hello_spring.service.MemberService;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-@Repository
+//@Repository
 public class MemoryMemberRepository implements MemberRepository {
     /*
     회원 정보를 저장하고 관리하기 위한 저장소 역할이기 때문에, 모든 인스턴스들이 동일한 저장소를 공유하도록 static 변수로 선언
