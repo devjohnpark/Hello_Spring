@@ -3,16 +3,20 @@ package com.hello_spring.hello_spring.service;
 import com.hello_spring.hello_spring.domain.Member;
 import com.hello_spring.hello_spring.repository.MemberRepository;
 import com.hello_spring.hello_spring.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class MemberService {
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
     private final MemberRepository memberRepository;
 
     // 의존성을 외부에서 주입하도록 변경하여, MemberServiceTest에서 MemberService와 동일한 MemoryMemberRepository 객체로 테스트 가능
     // MemberServiceTest에서 MemoryMemberRepository 객체를 MemberService에 주입하여 동일한 객체로 테스트를 할 수 있다.
+    @Autowired
     public MemberService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
