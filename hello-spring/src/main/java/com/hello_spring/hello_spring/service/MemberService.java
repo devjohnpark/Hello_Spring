@@ -12,6 +12,7 @@ import java.util.Optional;
 //@Service
 public class MemberService {
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
+
     private final MemberRepository memberRepository;
 
     // 의존성을 외부에서 주입하도록 변경하여, MemberServiceTest에서 MemberService와 동일한 MemoryMemberRepository 객체로 테스트 가능
@@ -37,7 +38,7 @@ public class MemberService {
     }
 
     // 전체 회원 조회
-    public List<Member> findMembers(String name) {
+    public List<Member> findMembers() {
         return memberRepository.findAll();
     }
 
