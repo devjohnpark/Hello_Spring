@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface MemberRepository {
     Member save(Member member);
-    Optional findById(Long id);
-    Optional findByName(String name);
+    Optional<Member> findById(Long id);
+    Optional<Member> findByName(String name);
     List<Member> findAll();
 }

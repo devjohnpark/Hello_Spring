@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 
 //@Repository
 public class MemoryMemberRepository implements MemberRepository {
@@ -16,30 +18,33 @@ public class MemoryMemberRepository implements MemberRepository {
     클래스 변수는 특정 클래스를 사용하는 스레드 사이에서 동시성 문제가 발생한다. 즉, 클래스 변수에 접근하는 모든 스레드에서 동시성 문제가 발생한다.
     */
 
+
     /* 변수 갱신시에 동시성 문제가 발생 가능 */
     // HashMap 대신 ConcurrentHashMap의 사용 필요
-    public static Map<Long, Member> store = new HashMap<>(); // 회원 저장소
+//    public static Map<Long, Member> store = new HashMap<>(); // 회원 저장소
+    public static Map<Long, Member> store = new ConcurrentHashMap<>(); // 회원 저장소
 
     // long 대신 AtomicLong 사용 필요
-    private static long sequence = 0L; // 연속적인  인덱스
+//    private static long sequence = 0L; // 연속적인  인덱스
+    private static AtomicLong sequence = new AtomicLong(0); // 연속적인 인덱스
 
     @Override
     public Member save(Member member) {
-        member.setId(++sequence);
+        member.setId(sequence.incrementAndGet());
         store.put(member.getId(), member);
         return member;
     }
 
     @Override
-    public Optional findById(Long id) {
+    public Optional<Member> findById(Long id) {
         return Optional.ofNullable(store.get(id));
     }
 
     @Override
-    public Optional findByName(String name) {
+    public Optional<Member> findByName(String name) {
         return store.values().stream().
                 filter(member -> member.getName().equals(name))
-                .findAny(); // 조건에 일치하는 값 없을시, Optional에 null 값이 wrapping되서 반환된다.
+                .findAny(); // 조건에 일치하는 값 없을시, 빈 Optional 객체를 반환한다.
     }
 
     // 실무에서는 리스트를 많이 쓴다. 리스트는 루프 돌리기도 편하기 때문.

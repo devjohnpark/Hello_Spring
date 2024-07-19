@@ -31,7 +31,7 @@ class MemoryMemberRepositoryTest {
         memberRepository.save(member);
 
 //        // Optional 타입일 경우, get 메서드로 강제로 Optional 타입을 추출하는 것은 좋지  않지만, 테스트 코드에서는 허용된다.
-//        Member result = (Member) memberRepository.findMemberById(member.getId()).get();
+//        Member result = memberRepository.findMemberById(member.getId()).get();
 //
 //                System.out.println("result: " + (result == member));
 //
@@ -40,9 +40,8 @@ class MemoryMemberRepositoryTest {
 //        Assertions.assertThat(result).isEqualTo(member);
 
         // 아니면, 아래처럼 람다 표현식을 사용할수 있다.
-        Optional<Member> result = memberRepository.findById(member.getId());
-
-        result.ifPresent(foundMember -> {
+        memberRepository.findById(member.getId())
+                .ifPresent(foundMember -> {
             Assertions.assertThat(foundMember).isEqualTo(member);
         });
     }
@@ -57,7 +56,7 @@ class MemoryMemberRepositoryTest {
         member2.setName("spring2");
         memberRepository.save(member2);
 
-        Member result = (Member) memberRepository.findByName(member1.getName()).get();
+        Member result = memberRepository.findByName(member1.getName()).get();
         Assertions.assertThat(result).isEqualTo(member1);
     }
 
