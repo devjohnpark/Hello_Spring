@@ -37,11 +37,11 @@ public class HelloController {
 
     // 클라언트의 요청 처리
     @GetMapping("hello-mvc")
-    public String helloMvc(@RequestParam("name") String name, Model model) { // 클라이언트가 url에 "name"이란 parameter을 넣어서 요청
+    public String helloMvc(@RequestParam("name") String name, Model model) {
+        // model에게 데이터 전달 (뷰에서 삽입할 데이터)
+        model.addAttribute("name", name);
 
-        // 모델 데이터를 생성
-        model.addAttribute("name", name); // 모델에 파라매터 담아서 뷰에 쓴다.
-
+        // 뷰 이름 반환 (뷰에 대한 작업 처리를 위해 제어권 넘김)
         return "hello-template";
     }
 

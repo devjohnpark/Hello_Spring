@@ -70,10 +70,13 @@ class MemberServiceTest {
 
         // when (검증 할 메서드를 실행했을때)
         memberService.join(member1);
-        IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
 
         // then (그러면 결과가 이렇게 나와야돼)
-        assertThat(e.getMessage()).isEqualTo("Already existing member."); // 예외 처리 안발생하게
+        assertThrows(IllegalStateException.class, () -> memberService.join(member2));
+
+//        // 예외 메세지 검증
+//        IllegalStateException e = assertThrows(IllegalStateException.class, () -> memberService.join(member2));
+//        assertThat(e.getMessage()).isEqualTo("Already existing member."); // 예외 처리 안발생하게
 
         /*
         먼저, 예외 처리를 하기 위해 try-catch문을 사용할 수 있다.
@@ -81,8 +84,8 @@ class MemberServiceTest {
         try {
             memberService.join(member2); // 에외 발생
             fail("An exception should occur."); // 예외 발생 안할시, 테스트 케이스 실패 처리되어 에러 발생
-        } catch (IllegalStateException e) {
-            // then (그러면 결과가 이렇게 나와야돼)
+        } catch (IllegalStateException e) { // then (그러면 결과가 이렇게 나와야돼)
+	        // 작성하지 않아도됨 (예외 메세지 검증)
             assertThat(e.getMessage()).isEqualTo("Already existing member.");
         }
         */
