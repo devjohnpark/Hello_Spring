@@ -11,10 +11,11 @@ import java.util.Optional;
 
 public class JdbcMemberRepository implements MemberRepository {
 
-    // DB 접속 정보를 저장한 객체
+    // java에서 여러 종류의 데이터베이스 커넥션을 설정하고 관리하기 위한 인터페이스이며, Spring과 같은 프레임워크와 통합되어 트랜잭션 동기화를 지원한다.
+    // DataSource는 DriverManager 대신 사용되며, 커넥션 풀링을 지원하여 데이터베이스 연결을 재사용하고 트랜잭션 관리를 지원하여 데이터 일관성과 무결성을 유지시킨다.
     private final DataSource dataSource;
 
-    // 빈 정의 구성파일에서 의존성 자동 주입하도록 설정 (application.properties에 접속 정보를 포함한 DataSource 객체 생성)
+    // 빈 정의 구성파일에서 DataSource을 구현한 빈을 의존성 자동 주입하도록 설정
     public JdbcMemberRepository(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -135,8 +136,8 @@ public class JdbcMemberRepository implements MemberRepository {
         }
     }
 
-    // 스프링 프레임워크를 통해서 DB에 접속할때는 DataSourceUtils를 통해서 커넥션 해야한다. 그래야 모두 동일한 커넥션에서 완전하게 트랙잭션이 수행된다.
-    // 여러 커넥션이 수립되어 각 커넥션 마다 트랜잭션이 관리된다면, 각 트랜잭션에서 동일한 데이터에 접근시에 여러 동시성 이슈가 발생할 수 있다.
+    // 스프링 기반의 애플리케이션에서 DB에 연결시에는 DataSourceUtils를 통해서 커넥션을 한다. 이러면 동일한 커넥션에서 안전하게 트랙잭션이 수행된다.
+    // 만일, 여러 커넥션을 생성하여 커넥션 마다 트랜잭션이 관리된다면, 각 트랜잭션에서 동일한 데이터에 접근시에 동시성 이슈가 발생할 수 있기 때문이다.
     private Connection getConnection() {
         // DB 접속 정보를 가지고 데이터베이스와 연결 시도 후 성공시 연결 객체 반환
         return DataSourceUtils.getConnection(dataSource);
