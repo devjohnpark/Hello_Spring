@@ -15,7 +15,7 @@ public class JdbcMemberRepository implements MemberRepository {
     // DataSource는 DriverManager 대신 사용되며, 커넥션 풀링을 지원하여 데이터베이스 연결을 재사용하고 트랜잭션 관리를 지원하여 데이터 일관성과 무결성을 유지시킨다.
     private final DataSource dataSource;
 
-    // 빈 정의 구성파일에서 DataSource을 구현한 빈을 의존성 자동 주입하도록 설정
+    // 빈 구성 파일에서 DataSource을 구현한 빈을 의존성 자동 주입하도록 설정
     public JdbcMemberRepository(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -143,7 +143,7 @@ public class JdbcMemberRepository implements MemberRepository {
         return DataSourceUtils.getConnection(dataSource);
     }
 
-    // 애플리케이션의 데이터 처리에 필요했던 DB 서버의 리소스(파일 및 메모리) 모두 반환
+    // 애플리케이션의 데이터 처리에 필요했던 DB 서버의 리소스(파일 디스크립터가 참조하는 메모리 자원) 모두 반환
     private void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
         try {
             if (rs != null) {

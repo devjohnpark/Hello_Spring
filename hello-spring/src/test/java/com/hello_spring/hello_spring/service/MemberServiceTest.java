@@ -43,7 +43,7 @@ class MemberServiceTest {
     void join() {
         // given (주어진 상황)
         Member member = new Member();
-        member.setName("jun");
+        member.setName("spring");
 
         // when (검증 할 메서드를 실행했을때)
         Long resultId = memberService.join(member);
@@ -65,8 +65,8 @@ class MemberServiceTest {
         Member member1 = new Member();
         Member member2 = new Member();
 
-        member1.setName("jun");
-        member2.setName("jun");
+        member1.setName("john");
+        member2.setName("john");
 
         // when (검증 할 메서드를 실행했을때)
         memberService.join(member1);

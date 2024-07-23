@@ -16,6 +16,7 @@ public class SpringConfig {
 
     private final DataSource dataSource;
 
+    // 스프링이 DataSource 인터페이스를 구현한 HikariCP 등의 커넥션 풀 구현체를 사용하여 빈을 생성 및 주입
     @Autowired
     public SpringConfig(DataSource dataSource) {
         this.dataSource = dataSource;
