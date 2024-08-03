@@ -3,11 +3,13 @@ package com.hello_spring.hello_spring.service;
 import com.hello_spring.hello_spring.domain.Member;
 import com.hello_spring.hello_spring.repository.MemberRepository;
 import com.hello_spring.hello_spring.repository.MemoryMemberRepository;
+import jakarta.persistence.Column;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,6 +39,7 @@ class MemberServiceIntegrationTest {
 //    }
 
     @Test
+//    @Commit Test에서도 커밋하도록 설정
     void join() {
         // given (주어진 상황)
         Member member = new Member();
